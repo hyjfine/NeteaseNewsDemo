@@ -30,15 +30,17 @@
 
     <fragment
         android:id="@+id/navigation_drawer"
-        android:name="com.daiyan.news.NavigationDrawerFragment"
+        android:name="com.daiyan.news.fragment.left.LeftFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
-        android:layout_gravity="left" />
+        android:layout_gravity="left"
+        android:visibility="invisible" />
     <fragment
         android:id="@+id/navigation_drawer_right"
-        android:name="com.daiyan.news.NavigationDrawerFragment"
+        android:name="com.daiyan.news.fragment.right.RightFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:visibility="invisible" />
 
 </android.support.v4.widget.DrawerLayout>
