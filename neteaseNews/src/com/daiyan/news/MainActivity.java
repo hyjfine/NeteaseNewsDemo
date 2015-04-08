@@ -68,6 +68,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			case 3:
 				mTitle = getString(R.string.title_section3);
 				break;
+			case 4:
+				mTitle = getString(R.string.title_section4);
+				break;
 			}
 		} else if (typeId == R.id.navigation_drawer_right) {
 			switch (number) {

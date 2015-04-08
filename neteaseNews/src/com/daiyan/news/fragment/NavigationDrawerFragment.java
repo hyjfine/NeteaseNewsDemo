@@ -266,12 +266,13 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	/**
-	 * Callbacks interface that all activities using this fragment must
-	 * implement.
+	 *  侧边Fragment条目被选中后调用接口
 	 */
 	public static interface NavigationDrawerCallbacks {
 		/**
-		 * Called when an item in the navigation drawer is selected.
+		 * 当侧边Fragment条目被选中后调用
+		 * @param position 条目position
+		 * @param typeId 区分左侧和右侧
 		 */
 		void onNavigationDrawerItemSelected(int position, int typeId);
 	}
