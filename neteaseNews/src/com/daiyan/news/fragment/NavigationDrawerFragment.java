@@ -276,4 +276,12 @@ public class NavigationDrawerFragment extends Fragment {
 		 */
 		void onNavigationDrawerItemSelected(int position, int typeId);
 	}
+	
+	/**
+	 * 控制第一次是否打开drawer。
+	 * @param UserLearned
+	 */
+	public void setUserLearnedDrawer(boolean UserLearned){
+		mUserLearnedDrawer = UserLearned;
+	}
 }
