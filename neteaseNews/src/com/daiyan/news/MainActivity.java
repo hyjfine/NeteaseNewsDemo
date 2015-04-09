@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.daiyan.neteasenews.R;
 import com.daiyan.news.fragment.NavigationDrawerFragment;
+import com.daiyan.news.fragment.center.NewsFragment;
 import com.daiyan.news.fragment.center.PlaceholderFragment;
 import com.daiyan.news.fragment.left.LeftFragment;
 import com.daiyan.news.fragment.right.RightFragment;
@@ -47,11 +48,18 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 	public void onNavigationDrawerItemSelected(int position, int typeId) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1, typeId)).commit();
+		if (position == 0 && typeId == R.id.navigation_drawer) {// 暂时定死
+			NewsFragment fragment = new NewsFragment();
+			fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+		} else {
+			fragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1, typeId)).commit();
+		}
+
 	}
 
 	/**
 	 * 调整ActionBar的标题显示mTitle
+	 * 
 	 * @param number
 	 * @param typeId
 	 */
@@ -116,39 +124,4 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-//	/**
-//	 * ContentFragment containing a simple content
-//	 */
-//	public static class PlaceholderFragment extends Fragment {
-//		private static final String ARG_SECTION_NUMBER = "section_number";
-//		private static final String TYPE_ID = "type_id";
-//
-//		public static PlaceholderFragment newInstance(int sectionNumber, int typeId) {
-//			PlaceholderFragment fragment = new PlaceholderFragment();
-//			Bundle args = new Bundle();
-//			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//			args.putInt(TYPE_ID, typeId);
-//			fragment.setArguments(args);
-//			return fragment;
-//		}
-//
-//		public PlaceholderFragment() {
-//		}
-//
-//		@Override
-//		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-//			TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//			textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-//			return rootView;
-//		}
-//
-//		@Override
-//		public void onAttach(Activity activity) {
-//			super.onAttach(activity);
-//			((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER), getArguments().getInt(TYPE_ID));
-//		}
-//	}
-
 }

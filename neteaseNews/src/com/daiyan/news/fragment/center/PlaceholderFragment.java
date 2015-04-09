@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.daiyan.news.fragment.center;
 
 import com.daiyan.neteasenews.R;

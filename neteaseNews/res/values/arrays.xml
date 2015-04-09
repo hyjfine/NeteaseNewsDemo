@@ -2,11 +2,24 @@
 <resources>
 
     <string-array name="left_fragment">
-        <item>新闻</item>
-        <item>订阅</item>
+        <item>新闻</item><item>订阅</item>
         <item>图片</item>
         <item>视频</item>
         <item>跟帖</item>
+    </string-array>
+    <string-array name="news">
+        <item>头条</item>
+        <item>娱乐</item>
+        <item>轻松一刻</item>
+        <item>体育</item>
+        <item>上海</item>
+        <item>财经</item>
+        <item>科技</item>
+        <item>段子</item>
+        <item>图片</item>
+        <item>热点</item>
+        <item>彩票</item>
+
     </string-array>
 
 </resources>
