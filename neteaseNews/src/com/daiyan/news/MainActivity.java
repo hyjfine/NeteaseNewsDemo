@@ -25,7 +25,7 @@ import com.daiyan.news.fragment.right.RightFragment;
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 	private CharSequence mTitle;
 	private FragmentManager mFragmentManager;
-	private LeftFragment mNavigationDrawerFragment;
+	private LeftFragment mNavigationDrawerFragmentLeft;
 	private RightFragment mNavigationDrawerFragmentRight;
 
 	@Override
@@ -34,11 +34,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		setContentView(R.layout.activity_main);
 		mTitle = getTitle();
 		mFragmentManager = getSupportFragmentManager();
-		mNavigationDrawerFragment = (LeftFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_left);
+		mNavigationDrawerFragmentLeft = (LeftFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_left);
 		mNavigationDrawerFragmentRight = (RightFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_right);
 
 		// Set up the drawer.
-		mNavigationDrawerFragment.setUp(R.id.navigation_drawer_left, (DrawerLayout) findViewById(R.id.drawer_layout));
+		mNavigationDrawerFragmentLeft.setUp(R.id.navigation_drawer_left, (DrawerLayout) findViewById(R.id.drawer_layout));
 		mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right, (DrawerLayout) findViewById(R.id.drawer_layout));
 	}
 
@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (!mNavigationDrawerFragment.isDrawerOpen()) {
+		if (!mNavigationDrawerFragmentLeft.isDrawerOpen() && (!mNavigationDrawerFragmentRight.isDrawerOpen())) {
 			getMenuInflater().inflate(R.menu.main_menu, menu);
 			restoreActionBar();
 			return true;
