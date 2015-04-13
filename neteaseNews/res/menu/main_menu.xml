@@ -4,9 +4,10 @@
     tools:context="com.daiyan.wangyidy.MainActivity" >
 
     <item
-        android:id="@+id/action_example"
+        android:id="@+id/action_person_icon"
+        android:icon="@drawable/base_main_action_personal_normal"
         android:title="@string/action_example"
-        app:showAsAction="withText|ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

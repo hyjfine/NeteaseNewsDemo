@@ -1,5 +1,7 @@
 package com.daiyan.news;
 
+import java.lang.reflect.Field;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -7,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
 
 import com.daiyan.neteasenews.R;
 import com.daiyan.news.fragment.NavigationDrawerFragment;
@@ -40,6 +43,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		// Set up the drawer.
 		mNavigationDrawerFragmentLeft.setUp(R.id.navigation_drawer_left, (DrawerLayout) findViewById(R.id.drawer_layout));
 		mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+		getOverflowMenu();// 针对部分有物理菜单按钮强制显示菜单键
 	}
 
 	@Override
@@ -71,7 +76,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 	public void restoreActionBar() {
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		// actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		// 设置ActionBar标题是否显示
 		actionBar.setDisplayShowTitleEnabled(true);
 		// 设置ActionBar左边默认的图标是否可用
@@ -84,12 +89,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (!mNavigationDrawerFragmentLeft.isDrawerOpen() && (!mNavigationDrawerFragmentRight.isDrawerOpen())) {
-			getMenuInflater().inflate(R.menu.main_menu, menu);
-			restoreActionBar();
-			return true;
-		}
-		return super.onCreateOptionsMenu(menu);
+		getMenuInflater().inflate(R.menu.main_menu, menu);
+		restoreActionBar();
+		return true;
 	}
 
 	@Override
@@ -99,5 +101,19 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	// force to show overflow menu in actionbar for android 4.4 below
+	private void getOverflowMenu() {
+		try {
+			ViewConfiguration config = ViewConfiguration.get(this);
+			Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(config, false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

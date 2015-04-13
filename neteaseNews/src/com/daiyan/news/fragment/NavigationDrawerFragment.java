@@ -11,13 +11,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.daiyan.neteasenews.R;
 
@@ -72,7 +68,7 @@ public class NavigationDrawerFragment extends Fragment {
 		}
 		mTypeId = getId();
 		// Select either the default item (0) or the last selected item.
-//		selectItem(mCurrentSelectedPosition, mTypeId);
+		// selectItem(mCurrentSelectedPosition, mTypeId);
 	}
 
 	@Override
@@ -207,27 +203,28 @@ public class NavigationDrawerFragment extends Fragment {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (mDrawerLayout != null && isDrawerOpen()) {
-			inflater.inflate(R.menu.global, menu);
-		}
-		super.onCreateOptionsMenu(menu, inflater);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-
-		if (item.getItemId() == R.id.action_example) {
-			Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
+	// @Override
+	// public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	// // if (mDrawerLayout != null && isDrawerOpen()) {
+	// // inflater.inflate(R.menu.global, menu);
+	// // }
+	// super.onCreateOptionsMenu(menu, inflater);
+	// }
+	//
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// if (mDrawerToggle.onOptionsItemSelected(item)) {
+	// return true;
+	// }
+	//
+	// if (item.getItemId() == R.id.action_person_icon) {
+	// Toast.makeText(getActivity(), "Example action.",
+	// Toast.LENGTH_SHORT).show();
+	// return true;
+	// }
+	//
+	// return super.onOptionsItemSelected(item);
+	// }
 
 	protected ActionBar getActionBar() {
 		return ((ActionBarActivity) getActivity()).getSupportActionBar();
@@ -246,12 +243,13 @@ public class NavigationDrawerFragment extends Fragment {
 		 */
 		void onNavigationDrawerItemSelected(String title, int position, int typeId);
 	}
-	
+
 	/**
 	 * 控制第一次是否打开drawer。
+	 * 
 	 * @param UserLearned
 	 */
-	public void setUserLearnedDrawer(boolean UserLearned){
+	public void setUserLearnedDrawer(boolean UserLearned) {
 		mUserLearnedDrawer = UserLearned;
 	}
 }
