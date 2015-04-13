@@ -18,6 +18,7 @@
         android:id="@+id/menu_search"
         android:actionViewClass="android.widget.SearchView"
         android:showAsAction="ifRoom"
-        android:title="搜索"/>
+        android:title="搜索"
+        android:icon="@drawable/night_biz_account_head_selector_renren"/>
 
 </menu>

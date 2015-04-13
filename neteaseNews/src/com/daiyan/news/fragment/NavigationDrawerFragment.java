@@ -11,9 +11,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.daiyan.neteasenews.R;
 
@@ -25,8 +27,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
 	/**
-	 * Per the design guidelines, you should show the drawer on launch until the
-	 * user manually expands it. This shared preference tracks this.
+	 * 存放用户是否需要默认开启drawer的key
 	 */
 	private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
@@ -36,7 +37,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private NavigationDrawerCallbacks mCallbacks;
 
 	/**
-	 * Helper component that ties the action bar to the navigation drawer.
+	 * 将action bar和drawerlayout绑定的组件
 	 */
 	private ActionBarDrawerToggle mDrawerToggle;
 
@@ -53,8 +54,8 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
 
 		// Read in the flag indicating whether or not the user has demonstrated
 		// awareness of the
@@ -62,8 +63,8 @@ public class NavigationDrawerFragment extends Fragment {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
-		if (savedInstanceState != null) {
-			mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
+		if (bundle != null) {
+			mCurrentSelectedPosition = bundle.getInt(STATE_SELECTED_POSITION);
 			mFromSavedInstanceState = true;
 		}
 		mTypeId = getId();
@@ -74,8 +75,7 @@ public class NavigationDrawerFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		// Indicate that this fragment would like to influence the set of
-		// actions in the action bar.
+		// 设置该fragment拥有自己的actionbar action item
 		setHasOptionsMenu(true);
 	}
 
@@ -110,7 +110,7 @@ public class NavigationDrawerFragment extends Fragment {
 
 		// ActionBarDrawerToggle ties together the the proper interactions
 		// between the navigation drawer and the action bar app icon.
-		mDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, R.drawable.ic_drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+		mDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, R.drawable.abc_ic_ab_back_mtrl_am_alpha, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 			@Override
 			public void onDrawerClosed(View drawerView) {
 				super.onDrawerClosed(drawerView);
@@ -118,8 +118,7 @@ public class NavigationDrawerFragment extends Fragment {
 					return;
 				}
 
-				getActivity().supportInvalidateOptionsMenu(); // calls
-																// onPrepareOptionsMenu()
+				getActivity().supportInvalidateOptionsMenu();
 			}
 
 			@Override
@@ -130,27 +129,21 @@ public class NavigationDrawerFragment extends Fragment {
 				}
 
 				if (!mUserLearnedDrawer) {
-					// The user manually opened the drawer; store this flag to
-					// prevent auto-showing
-					// the navigation drawer automatically in the future.
 					mUserLearnedDrawer = true;
 					SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 					sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).commit();
 				}
 
-				getActivity().supportInvalidateOptionsMenu(); // calls
-																// onPrepareOptionsMenu()
+				getActivity().supportInvalidateOptionsMenu();// 每次访问都重新填充菜单项
 			}
 		};
 
-		// If the user hasn't 'learned' about the drawer, open it to introduce
-		// them to the drawer,
-		// per the navigation drawer design guidelines.
+		// 设置该fragment拥有自己的actionbar action item
 		if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
 			mDrawerLayout.openDrawer(mFragmentContainerView);
 		}
 
-		// Defer code dependent on restoration of previous instance state.
+		// Defer code dependent on restoration of previous instance state.??
 		mDrawerLayout.post(new Runnable() {
 			@Override
 			public void run() {
@@ -210,21 +203,21 @@ public class NavigationDrawerFragment extends Fragment {
 	// // }
 	// super.onCreateOptionsMenu(menu, inflater);
 	// }
-	//
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// if (mDrawerToggle.onOptionsItemSelected(item)) {
-	// return true;
-	// }
-	//
-	// if (item.getItemId() == R.id.action_person_icon) {
-	// Toast.makeText(getActivity(), "Example action.",
-	// Toast.LENGTH_SHORT).show();
-	// return true;
-	// }
-	//
-	// return super.onOptionsItemSelected(item);
-	// }
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+
+		if (item.getItemId() == R.id.action_person_icon) {
+			Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
 
 	protected ActionBar getActionBar() {
 		return ((ActionBarActivity) getActivity()).getSupportActionBar();

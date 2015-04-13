@@ -1,6 +1,7 @@
 package com.daiyan.news;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
+import android.view.Window;
 
 import com.daiyan.neteasenews.R;
 import com.daiyan.news.fragment.NavigationDrawerFragment;
@@ -44,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		mNavigationDrawerFragmentLeft.setUp(R.id.navigation_drawer_left, (DrawerLayout) findViewById(R.id.drawer_layout));
 		mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right, (DrawerLayout) findViewById(R.id.drawer_layout));
 
-		getOverflowMenu();// 针对部分有物理菜单按钮强制显示菜单键
+		getOverflowMenu();
 	}
 
 	@Override
@@ -81,6 +83,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		actionBar.setDisplayShowTitleEnabled(true);
 		// 设置ActionBar左边默认的图标是否可用
 		actionBar.setDisplayUseLogoEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(false);//设置左边ic_drawer图片不显示
+		actionBar.setLogo(R.drawable.night_biz_account_head_selector_qq);
 		actionBar.setTitle(mTitle);
 		// 设置是否显示返回键
 		// mActionBar.setHomeButtonEnabled(true);
@@ -103,7 +107,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		return super.onOptionsItemSelected(item);
 	}
 
-	// force to show overflow menu in actionbar for android 4.4 below
+	// 针对部分有物理菜单按钮强制显示菜单键force to show overflow menu in actionbar for android 4.4 below
 	private void getOverflowMenu() {
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
@@ -116,4 +120,21 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			e.printStackTrace();
 		}
 	}
+	
+	//使MenuItem显示图片  默认只显示文字 
+	@Override  
+	public boolean onMenuOpened(int featureId, Menu menu) {  
+	    if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {  
+	        if (menu.getClass().getSimpleName().equals("MenuBuilder")) {  
+	            try {  
+	                Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);  
+	                m.setAccessible(true);  
+	                m.invoke(menu, true);  
+	            } catch (Exception e) {  
+	            }  
+	        }  
+	    }  
+	    return super.onMenuOpened(featureId, menu);  
+	}  
+	
 }
