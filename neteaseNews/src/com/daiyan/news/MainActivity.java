@@ -14,11 +14,10 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 
 import com.daiyan.neteasenews.R;
-import com.daiyan.news.fragment.NavigationDrawerFragment;
-import com.daiyan.news.fragment.center.NewsFragment;
-import com.daiyan.news.fragment.center.PlaceholderFragment;
-import com.daiyan.news.fragment.left.LeftFragment;
-import com.daiyan.news.fragment.right.RightFragment;
+import com.daiyan.news.center.fragment.NewsFragment;
+import com.daiyan.news.center.fragment.PlaceholderFragment;
+import com.daiyan.news.left.fragment.LeftFragment;
+import com.daiyan.news.right.fragment.RightFragment;
 
 /**
  * @Title:

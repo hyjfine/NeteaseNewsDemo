@@ -1,4 +1,4 @@
-package com.daiyan.news.fragment;
+package com.daiyan.news;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.daiyan.news.fragment.center;
+package com.daiyan.news.center.fragment;
 
 import com.daiyan.neteasenews.R;
 

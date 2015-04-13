@@ -1,4 +1,4 @@
-package com.daiyan.news.fragment.center;
+package com.daiyan.news.center.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

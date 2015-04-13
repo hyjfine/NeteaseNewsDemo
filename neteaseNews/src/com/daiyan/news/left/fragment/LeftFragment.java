@@ -1,4 +1,4 @@
-package com.daiyan.news.fragment.left;
+package com.daiyan.news.left.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daiyan.neteasenews.R;
-import com.daiyan.news.fragment.NavigationDrawerFragment;
+import com.daiyan.news.NavigationDrawerFragment;
 
 /**
  * @Title:
