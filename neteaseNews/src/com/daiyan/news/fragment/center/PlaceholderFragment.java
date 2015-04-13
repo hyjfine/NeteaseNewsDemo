@@ -1,15 +1,15 @@
 package com.daiyan.news.fragment.center;
 
-import com.daiyan.neteasenews.R;
-import com.daiyan.news.MainActivity;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.daiyan.neteasenews.R;
 
 /**
  * @Title:
@@ -42,9 +42,13 @@ public class PlaceholderFragment extends Fragment {
 		return rootView;
 	}
 
+	/**
+	 * Fragment被创建时首先被调用，并修改ActionBar title
+	 */
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER), getArguments().getInt(TYPE_ID));
+		Log.i("method", "onAttach__PlaceholdFragment_设置ActionBar title");
+//		((MainActivity) activity).onSectionAttached(null, getArguments().getInt(ARG_SECTION_NUMBER), getArguments().getInt(TYPE_ID));
 	}
 }

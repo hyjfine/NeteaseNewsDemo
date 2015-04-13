@@ -30,18 +30,18 @@ public class LeftFragment extends NavigationDrawerFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		strings = getResources().getStringArray(R.array.left_fragment);
 		picIds = new int[] { R.drawable.night_biz_account_head_selector_netease, R.drawable.night_biz_account_head_selector_qq, R.drawable.night_biz_account_head_selector_renren, R.drawable.night_biz_account_head_selector_sina };
-		layout = (LinearLayout)inflater.inflate(R.layout.left_fragment_layout, null);
-		
-		mDrawerListView=(ListView)layout.findViewById(R.id.lv_leftfragment);
+		layout = (LinearLayout) inflater.inflate(R.layout.left_fragment_layout, null);
+
+		mDrawerListView = (ListView) layout.findViewById(R.id.lv_leftfragment);
 		mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				selectItem(position, mTypeId);
+				selectItem(strings[position], position, mTypeId);
 			}
 		});
 		mDrawerListView.setAdapter(new MyAdapter());
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-		
+
 		return layout;
 	}
 

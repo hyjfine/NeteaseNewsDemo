@@ -29,7 +29,7 @@
     -->
 
     <fragment
-        android:id="@+id/navigation_drawer"
+        android:id="@+id/navigation_drawer_left"
         android:name="com.daiyan.news.fragment.left.LeftFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"

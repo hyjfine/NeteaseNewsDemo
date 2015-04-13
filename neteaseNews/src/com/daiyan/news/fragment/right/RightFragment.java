@@ -25,7 +25,6 @@ public class RightFragment extends NavigationDrawerFragment {
 		mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				selectItem(position, mTypeId);
 			}
 		});
 		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(), android.R.layout.simple_list_item_1, android.R.id.text1, new String[] { getString(R.string.title_section1_r), getString(R.string.title_section2_r), getString(R.string.title_section3_r) }));

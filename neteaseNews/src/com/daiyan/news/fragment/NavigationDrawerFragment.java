@@ -72,7 +72,7 @@ public class NavigationDrawerFragment extends Fragment {
 		}
 		mTypeId = getId();
 		// Select either the default item (0) or the last selected item.
-		selectItem(mCurrentSelectedPosition, mTypeId);
+//		selectItem(mCurrentSelectedPosition, mTypeId);
 	}
 
 	@Override
@@ -86,25 +86,6 @@ public class NavigationDrawerFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return container;
-		// mDrawerListView = (ListView)
-		// inflater.inflate(R.layout.fragment_navigation_drawer, container,
-		// false);
-		// mDrawerListView.setOnItemClickListener(new
-		// AdapterView.OnItemClickListener() {
-		// @Override
-		// public void onItemClick(AdapterView<?> parent, View view, int
-		// position, long id) {
-		// selectItem(position, mTypeId);
-		// }
-		// });
-		// mDrawerListView.setAdapter(new
-		// ArrayAdapter<String>(getActionBar().getThemedContext(),
-		// android.R.layout.simple_list_item_1, android.R.id.text1, new String[]
-		// { getString(R.string.title_section1),
-		// getString(R.string.title_section2),
-		// getString(R.string.title_section3), }));
-		// mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-		// return mDrawerListView;
 	}
 
 	public boolean isDrawerOpen() {
@@ -115,17 +96,17 @@ public class NavigationDrawerFragment extends Fragment {
 	 * Users of this fragment must call this method to set up the navigation
 	 * drawer interactions.
 	 * 
-	 * @param fragmentId
-	 *            The android:id of this fragment in its activity's layout.
-	 * @param drawerLayout
-	 *            The DrawerLayout containing this fragment's UI.
+	 * @param fragmentId The android:id of this fragment in its activity's
+	 *            layout.
+	 * @param drawerLayout The DrawerLayout containing this fragment's UI.
 	 */
 	public void setUp(int fragmentId, DrawerLayout drawerLayout) {
 		mFragmentContainerView = getActivity().findViewById(fragmentId);
 		mDrawerLayout = drawerLayout;
 
 		// add shadow
-//		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+		// mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
+		// GravityCompat.START);
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -141,7 +122,8 @@ public class NavigationDrawerFragment extends Fragment {
 					return;
 				}
 
-				getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+				getActivity().supportInvalidateOptionsMenu(); // calls
+																// onPrepareOptionsMenu()
 			}
 
 			@Override
@@ -160,7 +142,8 @@ public class NavigationDrawerFragment extends Fragment {
 					sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).commit();
 				}
 
-				getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+				getActivity().supportInvalidateOptionsMenu(); // calls
+																// onPrepareOptionsMenu()
 			}
 		};
 
@@ -182,7 +165,7 @@ public class NavigationDrawerFragment extends Fragment {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
-	public void selectItem(int position, int typeId) {
+	public void selectItem(String title, int position, int typeId) {
 		mCurrentSelectedPosition = position;
 		if (mDrawerListView != null) {
 			mDrawerListView.setItemChecked(position, true);
@@ -191,7 +174,7 @@ public class NavigationDrawerFragment extends Fragment {
 			mDrawerLayout.closeDrawer(mFragmentContainerView);
 		}
 		if (mCallbacks != null) {
-			mCallbacks.onNavigationDrawerItemSelected(position, typeId);
+			mCallbacks.onNavigationDrawerItemSelected(title, position, typeId);
 		}
 	}
 
@@ -226,13 +209,8 @@ public class NavigationDrawerFragment extends Fragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// If the drawer is open, show the global app actions in the action bar.
-		// See also
-		// showGlobalContextActionBar, which controls the top-left area of the
-		// action bar.
 		if (mDrawerLayout != null && isDrawerOpen()) {
 			inflater.inflate(R.menu.global, menu);
-//			showGlobalContextActionBar();
 		}
 		super.onCreateOptionsMenu(menu, inflater);
 	}
@@ -251,30 +229,22 @@ public class NavigationDrawerFragment extends Fragment {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * Fragment被创建显示ActionBar
-	 */
-	private void showGlobalContextActionBar() {
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		actionBar.setTitle(R.string.app_name);
-	}
-
 	protected ActionBar getActionBar() {
 		return ((ActionBarActivity) getActivity()).getSupportActionBar();
 	}
 
 	/**
-	 *  侧边Fragment条目被选中后调用接口
+	 * 侧边Fragment条目被选中后调用接口
 	 */
 	public static interface NavigationDrawerCallbacks {
 		/**
 		 * 当侧边Fragment条目被选中后调用
+		 * 
+		 * @param title Fragment类型名称
 		 * @param position 条目position
 		 * @param typeId 区分左侧和右侧
 		 */
-		void onNavigationDrawerItemSelected(int position, int typeId);
+		void onNavigationDrawerItemSelected(String title, int position, int typeId);
 	}
 	
 	/**

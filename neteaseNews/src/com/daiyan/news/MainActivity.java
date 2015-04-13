@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -24,92 +23,69 @@ import com.daiyan.news.fragment.right.RightFragment;
  * @date 2015年4月8日
  */
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
-	private LeftFragment mNavigationDrawerFragment;
 	private CharSequence mTitle;
+	private FragmentManager mFragmentManager;
+	private LeftFragment mNavigationDrawerFragment;
 	private RightFragment mNavigationDrawerFragmentRight;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		mNavigationDrawerFragment = (LeftFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-		mNavigationDrawerFragmentRight = (RightFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer_right);
 		mTitle = getTitle();
+		mFragmentManager = getSupportFragmentManager();
+		mNavigationDrawerFragment = (LeftFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_left);
+		mNavigationDrawerFragmentRight = (RightFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_right);
 
 		// Set up the drawer.
-		mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+		mNavigationDrawerFragment.setUp(R.id.navigation_drawer_left, (DrawerLayout) findViewById(R.id.drawer_layout));
 		mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right, (DrawerLayout) findViewById(R.id.drawer_layout));
-
 	}
 
 	@Override
-	public void onNavigationDrawerItemSelected(int position, int typeId) {
-		// update the main content by replacing fragments
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		if (position == 0 && typeId == R.id.navigation_drawer) {// 暂时定死
-			NewsFragment fragment = new NewsFragment();
-			fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-		} else {
-			fragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1, typeId)).commit();
+	public void onNavigationDrawerItemSelected(String title, int position, int typeId) {
+		if (typeId == R.id.navigation_drawer_left) {
+			// update the main ActionBar title
+			onSectionAttached(title, position);
+			// update the main content by replacing fragments
+			if (position == 0) {
+				NewsFragment fragment = new NewsFragment();
+				mFragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+			} else {
+				mFragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1, typeId)).commit();
+			}
+		} else if (typeId == R.id.navigation_drawer_right) {
+			// create new Activity
 		}
-
 	}
 
 	/**
 	 * 调整ActionBar的标题显示mTitle
 	 * 
-	 * @param number
-	 * @param typeId
+	 * @param title 显示在ActionBar上的title
+	 * @param number Fragment条目position
 	 */
-	public void onSectionAttached(int number, int typeId) {
-		Log.i("typeId", "typeId==" + typeId);
-		if (typeId == R.id.navigation_drawer) {
-			switch (number) {
-			case 1:
-				mTitle = getString(R.string.title_section1);
-				break;
-			case 2:
-				mTitle = getString(R.string.title_section2);
-				break;
-			case 3:
-				mTitle = getString(R.string.title_section3);
-				break;
-			case 4:
-				mTitle = getString(R.string.title_section4);
-				break;
-			}
-		} else if (typeId == R.id.navigation_drawer_right) {
-			switch (number) {
-			case 1:
-				mTitle = getString(R.string.title_section1_r);
-				break;
-			case 2:
-				mTitle = getString(R.string.title_section2_r);
-				break;
-			case 3:
-				mTitle = getString(R.string.title_section3_r);
-				break;
-			}
-		}
-
+	public void onSectionAttached(String title, int number) {
+		mTitle = title;
 	}
 
 	public void restoreActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		// 设置ActionBar标题是否显示
 		actionBar.setDisplayShowTitleEnabled(true);
+		// 设置ActionBar左边默认的图标是否可用
+		actionBar.setDisplayUseLogoEnabled(true);
 		actionBar.setTitle(mTitle);
+		// 设置是否显示返回键
+		// mActionBar.setHomeButtonEnabled(true);
+		// mActionBar.setDisplayShowCustomEnabled(true);// ???
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {
-			// Only show items in the action bar relevant to this screen
-			// if the drawer is not showing. Otherwise, let the drawer
-			// decide what to show in the action bar.
-			getMenuInflater().inflate(R.menu.main, menu);
+			getMenuInflater().inflate(R.menu.main_menu, menu);
 			restoreActionBar();
 			return true;
 		}
