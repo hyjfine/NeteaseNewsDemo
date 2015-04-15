@@ -27,7 +27,7 @@ public class RightFragment extends NavigationDrawerFragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			}
 		});
-		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(), android.R.layout.simple_list_item_1, android.R.id.text1, new String[] { getString(R.string.title_section1_r), getString(R.string.title_section2_r), getString(R.string.title_section3_r) }));
+		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, new String[] { getString(R.string.title_section1_r), getString(R.string.title_section2_r), getString(R.string.title_section3_r) }));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		setUserLearnedDrawer(true);
 		return mDrawerListView;

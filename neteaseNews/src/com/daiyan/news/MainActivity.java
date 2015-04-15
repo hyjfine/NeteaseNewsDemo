@@ -19,6 +19,7 @@ import com.daiyan.neteasenews.R;
 import com.daiyan.news.center.fragment.NewsFragment;
 import com.daiyan.news.center.fragment.PlaceholderFragment;
 import com.daiyan.news.left.fragment.LeftFragment;
+import com.daiyan.news.right.fragment.RightFragment;
 
 /**
  * @Title:
@@ -31,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 	private CharSequence mTitle;
 	private FragmentManager mFragmentManager;
 	private LeftFragment mNavigationDrawerFragmentLeft;
-	// private RightFragment mNavigationDrawerFragmentRight;
+	 private RightFragment mNavigationDrawerFragmentRight;
 	private Toolbar mToolbar;
 	private DrawerLayout mDrawLayout;
 
@@ -42,14 +43,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		mTitle = getTitle();
 		mFragmentManager = getSupportFragmentManager();
 		mNavigationDrawerFragmentLeft = (LeftFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_left);
-		// mNavigationDrawerFragmentRight = (RightFragment)
-		// mFragmentManager.findFragmentById(R.id.navigation_drawer_right);
+		mNavigationDrawerFragmentRight = (RightFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_right);
 		setToolBar();
 		// Set up the drawer.
 		mDrawLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mNavigationDrawerFragmentLeft.setUp(R.id.navigation_drawer_left, mDrawLayout, mToolbar);
-		// mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right,
-		// mDrawLayout,mToolbar);
+		mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right, mDrawLayout, mToolbar);
 
 		getOverflowMenu();
 
