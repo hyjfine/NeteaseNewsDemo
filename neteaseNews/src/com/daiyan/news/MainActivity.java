@@ -8,21 +8,22 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.daiyan.neteasenews.R;
 import com.daiyan.news.center.fragment.NewsFragment;
 import com.daiyan.news.center.fragment.PlaceholderFragment;
 import com.daiyan.news.left.fragment.LeftFragment;
-import com.daiyan.news.right.fragment.RightFragment;
 
 /**
  * @Title:
  * @Description:
- * @author daiyan 
+ * @author daiyan
  * @Company:
  * @date 2015年4月8日
  */
@@ -30,7 +31,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 	private CharSequence mTitle;
 	private FragmentManager mFragmentManager;
 	private LeftFragment mNavigationDrawerFragmentLeft;
-	private RightFragment mNavigationDrawerFragmentRight;
+	// private RightFragment mNavigationDrawerFragmentRight;
+	private Toolbar mToolbar;
+	private DrawerLayout mDrawLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +42,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		mTitle = getTitle();
 		mFragmentManager = getSupportFragmentManager();
 		mNavigationDrawerFragmentLeft = (LeftFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_left);
-		mNavigationDrawerFragmentRight = (RightFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_right);
-
+		// mNavigationDrawerFragmentRight = (RightFragment)
+		// mFragmentManager.findFragmentById(R.id.navigation_drawer_right);
+		setToolBar();
 		// Set up the drawer.
-		mNavigationDrawerFragmentLeft.setUp(R.id.navigation_drawer_left, (DrawerLayout) findViewById(R.id.drawer_layout));
-		mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right, (DrawerLayout) findViewById(R.id.drawer_layout));
+		mDrawLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mNavigationDrawerFragmentLeft.setUp(R.id.navigation_drawer_left, mDrawLayout, mToolbar);
+		// mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right,
+		// mDrawLayout,mToolbar);
 
 		getOverflowMenu();
+
 	}
 
 	@Override
@@ -60,9 +67,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			} else {
 				mFragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1, typeId)).commit();
 			}
-		} else if (typeId == R.id.navigation_drawer_right) {
-			// create new Activity
-		}
+		} /*
+		 * else if (typeId == R.id.navigation_drawer_right) { // create new
+		 * Activity }
+		 */
 	}
 
 	/**
@@ -82,7 +90,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		actionBar.setDisplayShowTitleEnabled(true);
 		// 设置ActionBar左边默认的图标是否可用
 		actionBar.setDisplayUseLogoEnabled(true);
-		actionBar.setDisplayHomeAsUpEnabled(false);//设置左边ic_drawer图片不显示
+		actionBar.setDisplayHomeAsUpEnabled(false);// 设置左边ic_drawer图片不显示
 		actionBar.setLogo(R.drawable.night_biz_account_head_selector_qq);
 		actionBar.setTitle(mTitle);
 		// 设置是否显示返回键
@@ -93,20 +101,21 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main_menu, menu);
-		restoreActionBar();
+		// restoreActionBar();
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
+		// int id = item.getItemId();
+		// if (id == R.id.action_settings) {
+		// return true;
+		// }
 		return super.onOptionsItemSelected(item);
 	}
 
-	// 针对部分有物理菜单按钮强制显示菜单键force to show overflow menu in actionbar for android 4.4 below
+	// 针对部分有物理菜单按钮强制显示菜单键force to show overflow menu in actionbar for android
+	// 4.4 below
 	private void getOverflowMenu() {
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
@@ -119,21 +128,51 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			e.printStackTrace();
 		}
 	}
-	
-	//使MenuItem显示图片  默认只显示文字 
-	@Override  
-	public boolean onMenuOpened(int featureId, Menu menu) {  
-	    if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {  
-	        if (menu.getClass().getSimpleName().equals("MenuBuilder")) {  
-	            try {  
-	                Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);  
-	                m.setAccessible(true);  
-	                m.invoke(menu, true);  
-	            } catch (Exception e) {  
-	            }  
-	        }  
-	    }  
-	    return super.onMenuOpened(featureId, menu);  
-	}  
-	
+
+	// 使MenuItem显示图片 默认只显示文字
+	@Override
+	public boolean onMenuOpened(int featureId, Menu menu) {
+		if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+			if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+				try {
+					Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+					m.setAccessible(true);
+					m.invoke(menu, true);
+				} catch (Exception e) {
+				}
+			}
+		}
+		return super.onMenuOpened(featureId, menu);
+	}
+
+	private void setToolBar() {
+		mToolbar = (Toolbar) this.findViewById(R.id.toolbar);
+		// mToolbar.setLogo(R.drawable.ic_launcher);
+		mToolbar.setTitle("Toolbar Demo");// 标题的文字需在setSupportActionBar之前，不然会无效
+		mToolbar.setSubtitle("subTitle");
+		mToolbar.setLogoDescription("新闻");
+		mToolbar.setLogo(R.drawable.night_biz_account_head_selector_qq);
+		mToolbar.setContentDescription("ContentD");
+		setSupportActionBar(mToolbar);
+
+		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				switch (item.getItemId()) {
+				case R.id.action_settings:
+					Toast.makeText(MainActivity.this, "action_settings", Toast.LENGTH_SHORT).show();
+					break;
+				case R.id.action_person_icon:
+					Toast.makeText(MainActivity.this, "action_person_icon", Toast.LENGTH_SHORT).show();
+					break;
+				default:
+					break;
+				}
+				return true;
+			}
+
+		});
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
 }
