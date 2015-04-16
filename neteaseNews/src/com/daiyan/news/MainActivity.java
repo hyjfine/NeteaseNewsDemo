@@ -30,9 +30,10 @@ import com.daiyan.news.right.fragment.RightFragment;
  */
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 	private CharSequence mTitle;
+	private CharSequence originTitle;
 	private FragmentManager mFragmentManager;
 	private LeftFragment mNavigationDrawerFragmentLeft;
-	 private RightFragment mNavigationDrawerFragmentRight;
+	private RightFragment mNavigationDrawerFragmentRight;
 	private Toolbar mToolbar;
 	private DrawerLayout mDrawLayout;
 
@@ -41,10 +42,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mTitle = getTitle();
+		originTitle = getTitle();
+		setToolBar();
 		mFragmentManager = getSupportFragmentManager();
 		mNavigationDrawerFragmentLeft = (LeftFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_left);
 		mNavigationDrawerFragmentRight = (RightFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer_right);
-		setToolBar();
+
 		// Set up the drawer.
 		mDrawLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mNavigationDrawerFragmentLeft.setUp(R.id.navigation_drawer_left, mDrawLayout, mToolbar);
@@ -66,10 +69,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			} else {
 				mFragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1, typeId)).commit();
 			}
-		} /*
-		 * else if (typeId == R.id.navigation_drawer_right) { // create new
-		 * Activity }
-		 */
+		} else if (typeId == R.id.navigation_drawer_right) { // create a new Act
+		}
+
 	}
 
 	/**
@@ -97,10 +99,26 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		// mActionBar.setDisplayShowCustomEnabled(true);// ???
 	}
 
+	public void restoreToolbar() {
+		if (mTitle.equals(originTitle)) {// first create
+			mToolbar.setTitle("");
+			mToolbar.setLogo(R.drawable.base_common_default_icon_small);
+			return;
+		}
+		if (mTitle.equals("新闻")) {
+			mToolbar.setTitle("");
+			mToolbar.setLogo(R.drawable.base_common_default_icon_small);
+		} else {
+			mToolbar.setTitle(mTitle);
+			mToolbar.setLogo(android.R.color.transparent);
+
+		}
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main_menu, menu);
-		// restoreActionBar();
+		restoreToolbar();
 		return true;
 	}
 
@@ -146,12 +164,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 	private void setToolBar() {
 		mToolbar = (Toolbar) this.findViewById(R.id.toolbar);
-		// mToolbar.setLogo(R.drawable.ic_launcher);
-		mToolbar.setTitle("Toolbar Demo");// 标题的文字需在setSupportActionBar之前，不然会无效
-		mToolbar.setSubtitle("subTitle");
-		mToolbar.setLogoDescription("新闻");
-		mToolbar.setLogo(R.drawable.night_biz_account_head_selector_qq);
-		mToolbar.setContentDescription("ContentD");
 		setSupportActionBar(mToolbar);
 
 		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
