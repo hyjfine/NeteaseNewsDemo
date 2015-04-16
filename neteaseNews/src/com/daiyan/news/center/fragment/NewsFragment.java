@@ -36,6 +36,8 @@ public class NewsFragment extends Fragment {
 		viewpager.setAdapter(new MyAdapter(getFragmentManager()));
 		tabStrip.setViewPager(viewpager);
 		
+		tabStrip.setIndicatorColor(getResources().getColor(R.color.colorPrimary_color));
+		
 		return view;
 	}
 

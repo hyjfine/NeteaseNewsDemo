@@ -2,5 +2,6 @@
 <resources>
 
     <color name="background_tab_pressed">#6633B5E5</color>
-
+	<color name="colorPrimary_color">#66cc99</color>
+	<color name="colorPrimaryDark_color">#66cc99</color>
 </resources>
