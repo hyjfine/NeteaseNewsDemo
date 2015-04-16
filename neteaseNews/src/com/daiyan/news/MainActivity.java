@@ -51,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		// Set up the drawer.
 		mDrawLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mNavigationDrawerFragmentLeft.setUp(R.id.navigation_drawer_left, mDrawLayout, mToolbar);
-		mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right, mDrawLayout, mToolbar);
+		mNavigationDrawerFragmentRight.setUp(R.id.navigation_drawer_right, mDrawLayout);
 
 		getOverflowMenu();
 
@@ -176,6 +176,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 					break;
 				case R.id.action_person_icon:
 					Toast.makeText(MainActivity.this, "action_person_icon", Toast.LENGTH_SHORT).show();
+					mNavigationDrawerFragmentRight.controlRightFragment();
 					break;
 				default:
 					break;

@@ -140,7 +140,7 @@ public class NavigationDrawerFragment extends Fragment {
 			}
 		};
 
-		// 设置该fragment拥有自己的actionbar action item
+		// 默认打开Fragment
 		if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
 			mDrawerLayout.openDrawer(mFragmentContainerView);
 		}
