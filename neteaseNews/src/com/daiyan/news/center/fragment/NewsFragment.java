@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.daiyan.neteasenews.R;
+import com.daiyan.news.widget.PagerSlidingTabStrip;
 
 /**
  * @Title:
