@@ -10,4 +10,5 @@
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
 	<dimen name="big_pic_height">240dp</dimen>
+	<dimen name="toolbar_title_size">20sp</dimen>
 </resources>

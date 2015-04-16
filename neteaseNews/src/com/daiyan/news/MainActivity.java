@@ -164,6 +164,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 	private void setToolBar() {
 		mToolbar = (Toolbar) this.findViewById(R.id.toolbar);
+		mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 		setSupportActionBar(mToolbar);
 
 		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -176,7 +177,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 					break;
 				case R.id.action_person_icon:
 					Toast.makeText(MainActivity.this, "action_person_icon", Toast.LENGTH_SHORT).show();
-					mNavigationDrawerFragmentRight.controlRightFragment();
+					if (mNavigationDrawerFragmentLeft.isDrawerOpen()) {
+						mDrawLayout.closeDrawer(mNavigationDrawerFragmentLeft.getContentView());
+					} else {
+						mNavigationDrawerFragmentRight.controlRightFragment();
+					}
+
 					break;
 				default:
 					break;

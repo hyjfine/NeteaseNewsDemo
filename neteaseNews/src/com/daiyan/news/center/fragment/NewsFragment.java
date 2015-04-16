@@ -37,7 +37,7 @@ public class NewsFragment extends Fragment {
 		tabStrip.setViewPager(viewpager);
 		
 		tabStrip.setIndicatorColor(getResources().getColor(R.color.colorPrimary_color));
-		
+		tabStrip.setTextSize(20);
 		return view;
 	}
 

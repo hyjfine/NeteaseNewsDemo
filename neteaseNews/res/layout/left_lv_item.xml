@@ -2,18 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="horizontal"
-    android:gravity="center" >
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp" >
 
     <ImageView
         android:id="@+id/iv_left_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingRight="10dp"
         android:src="@drawable/night_biz_account_head_selector_netease" />
 
-    <TextView 
+    <TextView
         android:id="@+id/tv_left_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="新闻"/>
+        android:textSize="@dimen/toolbar_title_size"
+        android:text="新闻" />
+
 </LinearLayout>

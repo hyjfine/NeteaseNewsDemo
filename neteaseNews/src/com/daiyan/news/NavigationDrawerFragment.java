@@ -246,4 +246,8 @@ public class NavigationDrawerFragment extends Fragment {
 	public void setUserLearnedDrawer(boolean UserLearned) {
 		mUserLearnedDrawer = UserLearned;
 	}
+	
+	public View getContentView(){
+		return mFragmentContainerView;
+	}
 }
