@@ -22,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.daiyan.news.login.LoginActivity"
+            android:label="登陆界面"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

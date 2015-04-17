@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/app_top_nav_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary_color"
+    android:gravity="center_vertical" >
+
+    <!-- 左边布局 -->
+
+    <RelativeLayout
+        android:id="@+id/top_left_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/base_back_click" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_top_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/top_left_layout"
+        android:gravity="center"
+        android:text="登录" />
+    <!-- 右边布局 -->
+
+    <FrameLayout
+        android:id="@+id/top_right_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:visibility="invisible" >
+
+        <ImageView
+            android:id="@+id/right_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_isInterest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3" />
+    </FrameLayout>
+
+</RelativeLayout>
