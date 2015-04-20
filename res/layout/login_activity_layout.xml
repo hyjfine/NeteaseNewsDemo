@@ -16,18 +16,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/background_tab_pressed"
             android:gravity="center"
             android:padding="10dp"
-            android:text="新浪登录" />
+            android:text="@string/login_sina" />
 
         <TextView
             android:id="@+id/tv_qq"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/background_tab_pressed"
             android:gravity="center"
             android:padding="10dp"
-            android:text="QQ登录" />
+            android:text="@string/login_qq" >
+        </TextView>
     </LinearLayout>
 
 </LinearLayout>
