@@ -18,4 +18,6 @@
 	<string name="login_qq">QQ登录</string>
 	<string name="back_close">关闭Activity按钮</string>
 	<string name="toolbar_right_button">Toolbar右边按钮</string>
+	<string name="weibosdk_demo_token_to_string_format_1">Token：%1$s \n有效期：%2$s</string>
+	<string name="weibosdk_demo_token_has_existed">Token 仍在有效期内，无需再次登录。</string>
 </resources>
