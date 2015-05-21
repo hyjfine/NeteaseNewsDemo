@@ -2,14 +2,20 @@ package com.daiyan.news.login;
 
 import java.text.SimpleDateFormat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import sina.AccessTokenKeeper;
 import sina.Constants;
+import sina.UserAPIActivity;
+import utils.IntentUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +26,9 @@ import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.LogoutAPI;
+import com.sina.weibo.sdk.widget.LoginButton;
 
 public class LoginActivity extends Activity {
 	private ImageView ivClose;
@@ -29,6 +38,11 @@ public class LoginActivity extends Activity {
 	private AuthInfo mAuthInfo;
 	private SsoHandler mSsoHandler;
 	private Oauth2AccessToken mAccessToken;
+	private LoginButton sinaButton;
+	private Button logoutButton;
+
+	/** 登出操作对应的listener */
+	private LogOutRequestListener mLogoutListener = new LogOutRequestListener();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +60,17 @@ public class LoginActivity extends Activity {
 		ivClose.setOnClickListener(new MyOnclickListener());
 		tvSina.setOnClickListener(new MyOnclickListener());
 		tvQQ.setOnClickListener(new MyOnclickListener());
+
+		/** 登陆认证对应的listener */
+		AuthListener mLoginListener = new AuthListener();
+		// 登陆按钮（默认样式）
+		sinaButton = (LoginButton) findViewById(R.id.login_button_default);
+		sinaButton.setOnClickListener(new MyOnclickListener());
+		sinaButton.setWeiboAuthInfo(mAuthInfo, mLoginListener);
+
+		logoutButton = (Button) findViewById(R.id.logout_button);
+		logoutButton.setOnClickListener(new MyOnclickListener());
+
 	}
 
 	private void initSina() {
@@ -80,6 +105,12 @@ public class LoginActivity extends Activity {
 				initSina();
 			} else if (arg0.equals(tvQQ)) {
 				Toast.makeText(getApplicationContext(), "通过QQ账号登录", Toast.LENGTH_SHORT).show();
+			} else if (arg0.equals(sinaButton)) {
+				Toast.makeText(getApplicationContext(), "通过新浪自带按钮登录", Toast.LENGTH_SHORT).show();
+				initSina();
+			} else if (arg0.equals(logoutButton)) {
+				new LogoutAPI(LoginActivity.this, Constants.APP_KEY, AccessTokenKeeper.readAccessToken(LoginActivity.this)).logout(mLogoutListener);
+
 			}
 		}
 	}
@@ -108,6 +139,8 @@ public class LoginActivity extends Activity {
 				// 保存Token到SharedPreference
 				AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);
 				Toast.makeText(LoginActivity.this, "授权成功！", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(getApplicationContext(), UserAPIActivity.class);
+				startActivity(intent);
 			} else {
 				// 以下几种情况，您会收到 Code：
 				// 1. 当您未在平台上注册的应用程序的包名与签名时；
@@ -158,5 +191,31 @@ public class LoginActivity extends Activity {
 	public void onBackPressed() {
 		this.finish();
 		this.overridePendingTransition(R.anim.left_fade_in, R.anim.right_fade_out);
+	}
+
+	/**
+	 * 登出按钮的监听器，接收登出处理结果。（API 请求结果的监听器）
+	 */
+	private class LogOutRequestListener implements RequestListener {
+		@Override
+		public void onComplete(String response) {
+			if (!TextUtils.isEmpty(response)) {
+				try {
+					JSONObject obj = new JSONObject(response);
+					String value = obj.getString("result");
+
+					if ("true".equalsIgnoreCase(value)) {
+						AccessTokenKeeper.clear(LoginActivity.this);
+						Toast.makeText(LoginActivity.this, "注销成功！", Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		@Override
+		public void onWeiboException(WeiboException e) {
+		}
 	}
 }

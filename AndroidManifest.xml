@@ -32,7 +32,11 @@
             android:label="登陆界面"
             android:screenOrientation="portrait" >
         </activity>
-        
+        <activity
+            android:name="sina.UserAPIActivity"
+            android:label="显示微博用户信息界面"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 分享微博时候用到 Web授权需要在 授权需要在 AndroidManifest.xml 中，注册授权页面 中，注册授权页面 中-->
         <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser" 
             android:configChanges="keyboardHidden|orientation"
