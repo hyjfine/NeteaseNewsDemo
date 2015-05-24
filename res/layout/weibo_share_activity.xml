@@ -5,23 +5,17 @@
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/tv_reg_sina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="用户名称：" />
+        android:padding="10dp"
+        android:text="注册应用到微博" />
 
     <TextView
-        android:id="@+id/tv_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
+        android:id="@+id/btn_share_sina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="用户头像路径：" />
-
-    <TextView
-        android:id="@+id/tv_userurl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:padding="10dp"
+        android:text="分享到微博" />
 
 </LinearLayout>

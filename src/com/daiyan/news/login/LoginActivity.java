@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import sina.AccessTokenKeeper;
 import sina.Constants;
 import sina.UserAPIActivity;
-import utils.IntentUtils;
+import sina.WeiboShareActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,6 +43,7 @@ public class LoginActivity extends Activity {
 
 	/** 登出操作对应的listener */
 	private LogOutRequestListener mLogoutListener = new LogOutRequestListener();
+	private TextView tvSinaShare;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,8 @@ public class LoginActivity extends Activity {
 		logoutButton = (Button) findViewById(R.id.logout_button);
 		logoutButton.setOnClickListener(new MyOnclickListener());
 
+		tvSinaShare = (TextView) findViewById(R.id.tv_sina_share);
+		tvSinaShare.setOnClickListener(new MyOnclickListener());
 	}
 
 	private void initSina() {
@@ -110,7 +113,9 @@ public class LoginActivity extends Activity {
 				initSina();
 			} else if (arg0.equals(logoutButton)) {
 				new LogoutAPI(LoginActivity.this, Constants.APP_KEY, AccessTokenKeeper.readAccessToken(LoginActivity.this)).logout(mLogoutListener);
-
+			}else if(arg0.equals(tvSinaShare)){
+				Intent intent = new Intent(getApplicationContext(), WeiboShareActivity.class);
+				startActivity(intent);
 			}
 		}
 	}

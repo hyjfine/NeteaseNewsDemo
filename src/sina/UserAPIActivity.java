@@ -22,10 +22,9 @@ public class UserAPIActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.userapi_layout);
-		
-		tvUserName=(TextView)findViewById(R.id.tv_username);
-		tvUserUrl=(TextView)findViewById(R.id.tv_userurl);
-		
+		tvUserName = (TextView) findViewById(R.id.tv_username);
+		tvUserUrl = (TextView) findViewById(R.id.tv_userurl);
+
 		// 获取当前已保存过的 Token
 		mAccessToken = AccessTokenKeeper.readAccessToken(this);
 		// 获取用户信息接口
