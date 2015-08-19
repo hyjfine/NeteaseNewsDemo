@@ -29,7 +29,7 @@ public class LeftFragment extends NavigationDrawerFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		strings = getResources().getStringArray(R.array.left_fragment);
-		picIds = new int[] { R.drawable.night_biz_account_head_selector_netease, R.drawable.night_biz_account_head_selector_qq, R.drawable.night_biz_account_head_selector_renren, R.drawable.night_biz_account_head_selector_sina };
+		picIds = new int[] { R.drawable.night_biz_account_head_selector_netease, R.drawable.night_biz_account_head_selector_qq, R.drawable.night_biz_account_head_selector_renren, R.drawable.night_biz_account_head_selector_sina,R.drawable.night_biz_account_head_selector_sina };
 		layout = (LinearLayout) inflater.inflate(R.layout.left_fragment_layout, null);
 
 		mDrawerListView = (ListView) layout.findViewById(R.id.lv_leftfragment);

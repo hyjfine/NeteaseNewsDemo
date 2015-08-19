@@ -50,6 +50,7 @@ public class UserAPIActivity extends Activity {
 				if (user != null) {
 					// 获取新浪用户名称
 					String userName = user.name;
+					Constants.userName = userName;
 					// 用户头像
 					String userUrl = user.avatar_large;
 					tvUserName.setText(userName);

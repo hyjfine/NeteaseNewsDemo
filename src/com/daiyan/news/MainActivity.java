@@ -16,6 +16,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.daiyan.neteasenews.R;
+import com.daiyan.news.center.fragment.MyWeiboFragment;
 import com.daiyan.news.center.fragment.NewsFragment;
 import com.daiyan.news.center.fragment.PlaceholderFragment;
 import com.daiyan.news.left.fragment.LeftFragment;
@@ -63,10 +64,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			// update the main ActionBar title
 			onSectionAttached(title, position);
 			// update the main content by replacing fragments
-			if (position == 0) {
+			if (position == 0) {//新闻列表
 				NewsFragment fragment = new NewsFragment();
 				mFragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-			} else {
+			} else if(position == 4){//查看微博详情
+				MyWeiboFragment weiboFragment = new MyWeiboFragment();
+				mFragmentManager.beginTransaction().replace(R.id.container, weiboFragment).commit();
+//				IntentUtils.startActivity(this, MyWeiboInfoActivity.class, null);
+			}else {
 				mFragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1, typeId)).commit();
 			}
 		} else if (typeId == R.id.navigation_drawer_right) { // create a new Act

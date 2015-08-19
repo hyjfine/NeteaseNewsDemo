@@ -13,4 +13,5 @@ public class Constants {
 	 * </p>
 	 */
 	public static final String REDIRECT_URL = "http://www.sina.com";
+	public static String userName = "";
 }

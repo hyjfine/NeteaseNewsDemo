@@ -6,7 +6,7 @@
         <item>订阅</item>
         <item>图片</item>
         <item>视频</item>
-        <item>跟帖</item>
+        <item>我的微博</item>
     </string-array>
     <string-array name="news">
         <item>头条</item>
