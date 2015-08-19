@@ -2,6 +2,30 @@
 <resources>
 
     <color name="background_tab_pressed">#6633B5E5</color>
-	<color name="colorPrimary_color">#66cc99</color>
-	<color name="colorPrimaryDark_color">#66cc99</color>
+    <color name="colorPrimary_color">#66cc99</color>
+    <color name="colorPrimaryDark_color">#66cc99</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000001</color>
+    <color name="yellow">#FFCC66</color>
+    <color name="watchet">#5DC8FF</color>
+    <color name="blue">#0091ff</color>
+    <color name="dark_blue">#013ca6</color>
+    <!-- 白灰色 米色 -->
+    <color name="beige">#f2f2f2</color>
+    <color name="Transparent">#00000000</color>
+    <color name="haft_Transparent">#88000000</color>
+    <!-- 透明 -->
+    <color name="gray">#B8B8B8</color>
+    <color name="app_mask">#C8494949</color>
+    <color name="red">#FF0000</color>
+    <color name="section">#767676</color>
+    <color name="shadow_start">#80000000</color>
+    <color name="shadow_end">#00000000</color>
+    <!-- <color name="section">#F2F2F2</color> -->
+    <color name="origin">#ff4912</color>
+    <color name="orange">#FF9933</color>
+    <color name="orange3">#f3c7a2</color>
+    <color name="green">#24a606</color>
+    <color name="holo_blue">#FF33E5B5</color>
+
 </resources>
